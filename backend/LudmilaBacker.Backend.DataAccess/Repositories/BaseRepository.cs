@@ -6,7 +6,7 @@ namespace LudmilaBacker.Backend.DataAccess.Repositories;
 
 public class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : class
 {
-    private readonly DatabaseContext _databaseContext;
+    protected readonly DatabaseContext _databaseContext;
 
     public BaseRepository(DatabaseContext databaseContext)
     {
@@ -43,18 +43,18 @@ public class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : cla
         return _databaseContext.Set<TModel>().FirstAsync(predicate);
     }
 
-    public IEnumerable<TModel> GetAll()
+    public IQueryable<TModel> GetAll()
     {
         return _databaseContext.Set<TModel>();
     }
 
-    public async Task<IEnumerable<TModel>> GetAllAsync()
+    public async Task<IQueryable<TModel>> GetAllAsync()
     {
         var models = _databaseContext.Set<TModel>();
         return await Task.FromResult(models);
     }
 
-    public IEnumerable<TModel> GetAll(Expression<Func<TModel, bool>> predicate)
+    public IQueryable<TModel> GetAll(Expression<Func<TModel, bool>> predicate)
     {
         return _databaseContext.Set<TModel>().Where(predicate);
     }

@@ -14,7 +14,7 @@ public interface IBaseRepository<TModel>
     TModel Get(Expression<Func<TModel, bool>> predicate);
     Task<TModel> GetAsync(Expression<Func<TModel, bool>> predicate);
     
-    IEnumerable<TModel> GetAll();
-    Task<IEnumerable<TModel>> GetAllAsync();
-    IEnumerable<TModel> GetAll(Expression<Func<TModel, bool>> predicate);
+    IQueryable<TModel> GetAll();
+    Task<IQueryable<TModel>> GetAllAsync();
+    IQueryable<TModel> GetAll(Expression<Func<TModel, bool>> predicate);
 }
